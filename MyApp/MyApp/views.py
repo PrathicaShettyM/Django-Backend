@@ -1,16 +1,16 @@
-# import the django.http
+# controller
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
-# simple methods for each route
 def home(request):
-    #return HttpResponse("Hello Django World!! This is my Home Page")
+    #return HttpResponse("Hello, world!! I'm Learning Django")
     return render(request, 'website/index.html')
-
-
+    
 def about(request):
-    return HttpResponse("Hello Django World!! This is my About Page")
+    #return HttpResponse("Hello, world!! This is my about page")
+    return render(request, 'website/about.html')
 
 def contact(request):
-    return HttpResponse("Hello Django World!! This is my Contact Page")
+    #return HttpResponse("Hello there, this is contact page")
+    return render(request, 'website/contact.html')

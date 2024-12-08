@@ -12,13 +12,13 @@ This is a popular python web framework for rapidly building web applications
 
 ## First-time Installation
 We need `uv` package manager
-1. Set a virtual environment for the django project with the command
+1. Set a virtual environment for the django project with the command(open bash)
 ```
 uv venv
 ```
 2. Activate the virtual environment
 ```
-.venv\Scripts\activate
+source .venv/Scripts/activate
 ```
 3. If you face any error in Windows OS, open the `windows-powershell` as an `administrator` and type the following command
 ```
@@ -38,13 +38,13 @@ cd MyApp
 ```
 7. Run the Django server
 ```
-py manage.py runserver 
+python manage.py runserver 
 ```
 - Use the above command whenever you want to restart the server(Dont forget to navigate to the manage.py's directory)
 
-- If some the port is bloacked for some reason then use a port number
+- If some the port is blocked for some reason then use a port number
 ```
-py manage.py runserver 8001
+python manage.py runserver 8001
 ```
 
 
