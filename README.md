@@ -51,10 +51,11 @@ python manage.py runserver 8001
 ## To run subsequent times(After restarting the system)
 You will need to use the following commands 
 ```
- uv venv
-```
-```
-.venv\Scripts\activate
+source .venv/Scripts/activate
+
+cd MyApp
+
+python manage.py runserver
 ```
 - Note: If you are not restarting the system, then use `py manage.py runserver` command
 
@@ -117,6 +118,10 @@ py -m ensurepip --upgrade
 ```
 py -m pip install --upgrade pip
 ```
+
+```
+pip install django-tailwind
+```
 Note: use both when needed
 
 2. Install `tailwind css` with the following command
@@ -126,6 +131,7 @@ pip install 'django-tailwind[reload]'
 3. Go to `settings.py` and in apps object, add 'tailwind'
 
 4. Use this command to initiate tailwind in the server. Some packages will be installed along with a folder named `theme` if you keep the default settings
+- Go to `settings.py` and in apps object, add 'theme'
 ```
 py manage.py tailwind init
 ```
@@ -134,9 +140,73 @@ py manage.py tailwind init
 ```
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = ['127.0.0.1']
+NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 ```
 7. Use the command 
 ```
+python manage.py tailwind install
+```
+8. Inject the tailwind commands from the base.hmtl of `theme` folder into layout.html file in MyApp
+```
+{% load static tailwind_tags %}
 
+{% tailwind_css %}
+```
+9. Open one more terminal(it also has to be bash) and name it `tailwind` and run this command
+```
+ python manage.py tailwind start
+```
+10. In the normal terminal where the django app is running, restart the server over there. Now tailwind starts generating css
+
+11. Do the following in `settings.py` to enable hot reloading
+```
+MIDDLEWARE = [
+    "django_browser_reload.middleware.BrowserReloadMiddleware"
+]
+
+INSTALLED_APPS = [
+    "chai",
+    "tailwind",
+    "theme",
+    "django_browser_reload"
+]
+```
+
+12. Do this in `views.py` of MyApp
+```
+urlpatterns = [
+
+    path("__reload__/", include("django_browser_reload.urls")), 
+]
+
+```
+
+## super user and admin
+1. Due migrations get migrated. After this command we wont get the inital erros
+```
+python manage.py migrate
+```
+
+
+## Jinja2 and Django apps
+
+1. Create a new project in the folder
+```
+python manage.py startapp chai
+```
+
+2. Go to settings add emmet for django-html
+
+3. Create layouts and inject code
+```
+{% extends "layout.html" %}
+
+{% block title %}
+    all chai page | index.html title
+{% endblock %}
+
+{% block content %}
+    <h1>Which chai would u like to have ? </h1>
+{% endblock %}
 ```
 
