@@ -1,13 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Django </title>
-    <link rel="stylesheet" href="{% static 'style1.css' %}">
-</head>
-<body>
-    <h1>This is my 1st Django project</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+    Home page | index.html title
+{% endblock %}
+
+{% block content %}
+    <h1 class="bg-red-600 text-3xl">Welcome to chai and code | index.html content</h1>
+    <p class="text-center w-20">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus adipisci harum itaque laboriosam necessitatibus, nisi aspernatur perspiciatis beatae ab a eius accusamus. Sequi, labore eaque! Iste mollitia consequuntur reiciendis fugiat.</p>
+    {% endblock %}
