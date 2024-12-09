@@ -181,12 +181,16 @@ urlpatterns = [
 
 ```
 
-## super user and admin
+## Superuser and admin
 1. Due migrations get migrated. After this command we wont get the inital erros
 ```
 python manage.py migrate
 ```
-
+2. Inorder to change password
+```
+ python manage.py changepassword username
+```
+3. Enter the new password
 
 ## Jinja2 and Django apps
 
@@ -210,3 +214,47 @@ python manage.py startapp chai
 {% endblock %}
 ```
 
+## Database Modelling
+1. To handle image upload install
+```
+python -m pip install Pillow
+```
+2. Add the following in `settings.py` of MyApp
+```
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+3. Add these lines in `urls.py` in MyApp
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+4. Migrate the model
+```
+python manage.py makemigrations chai
+```
+- Make sure you run this command after every change to schema and then the other command
+```
+python manage.py makemigrations chai
+```
+```
+python manage.py migrate
+```
+
+
+- Note: we are writing models in the chai folder
+
+5. Register model
+```admin.py>chai
+from django.contrib import admin
+from .models import ChaiVariety
+
+# Register the models to database
+admin.site.register(ChaiVariety)
+```
+
+6. Register the users in admin route
