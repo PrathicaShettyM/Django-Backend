@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import ChaiVariety
 
-# Register your models here.
+# Register the models to database
+admin.site.register(ChaiVariety)
